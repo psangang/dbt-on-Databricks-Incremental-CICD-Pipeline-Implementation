@@ -1,0 +1,11 @@
+dbt_project_param:
+  outputs:
+    dev:
+      catalog: dbt_psangang_dev
+      host: dbc-1308d936-dd2c.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/0b65d18527a1c033
+      schema: default
+      threads: 1
+      token: dapiff8a8b35449c1e393dbdad71e328b83f
+      type: databricks
+  target: dev
