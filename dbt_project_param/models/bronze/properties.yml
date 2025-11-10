@@ -4,8 +4,40 @@ models:
   - name: bronze_customer #  Must match the filename of a model -- including case sensitivity.
     config:
       materialized: table
+      schema: bronze
 
   - name: bronze_date #  Must match the filename of a model -- including case sensitivity.
     config:
       materialized: table
+
+  - name: bronze_sales #  Must match the filename of a model -- including case sensitivity.
+    columns:
+      - name: sales_id
+        data_tests:
+          - unique
+          - not_null
+      - name: gross_amount
+        data_tests:
+          - custom_generic_non_negative  # Here we need to pass model and column name but if you notice we are calling this custom generic test within bronze_sales model and specifying column gross_amount.
+          
+
+  - name: bronze_store #  Must match the filename of a model -- including case sensitivity.
+    columns:
+      - name: store_sk
+        data_tests:
+          - unique
+          - not_null
+
+    columns:
+      - name: store_name
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['MegaMart Manhattan', 'MegaMart Brooklyn','MegaMart Austin','MegaMart San Jose','MegaMart Toronto']
+      - name: city
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['New York','Brooklyn','Austin','San Jose','Toronto']
+
 

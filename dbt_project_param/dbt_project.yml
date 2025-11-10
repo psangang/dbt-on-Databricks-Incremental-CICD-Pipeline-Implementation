@@ -31,6 +31,30 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_project_param:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    # Config indicated by + and applies to all files under models/example/ here we removed example and added bronze, silver & gold as we wnated to create new schemas
+    bronze: # this is a model name
       +materialized: view
+      schema: bronze
+    silver: # we have not yet created silver
+      +materialized: view
+      schema: gold
+    gold: # we have not yet created gold
+      +materialized: view
+      schema: gold
+    example: 
+      +materialized: view
+      schema: example_schema # This will create schema in databricks and based on what are present in example model, it creates those views or tables
+  
+  # Here, if I specify table below with same example section then table will be created although it sees two entries for same model
+
+
+seeds:
+  dbt_project_param:
+    mapping_or_lookup: # This is a seed name
+      +schema: example_schema
+    
+  +schema: bronze # since, we are specifying at folder level i.e. dbt_project_param level it automatically picks up seed from seed folder
+
+  # Note: dbt cannot create the same seed in multiple schemas at the same time with a single seed definition.
+
+

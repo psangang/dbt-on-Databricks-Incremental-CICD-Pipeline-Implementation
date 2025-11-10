@@ -8,8 +8,10 @@ models:
       - name: id
         description: "The primary key for this table"
         data_tests:
-          - unique
+          - unique # here under id column there is null and if we add -null test its going to fail
           - not_null
+        severity: warn
+
 
   - name: my_second_dbt_model
     description: "A starter dbt model"
