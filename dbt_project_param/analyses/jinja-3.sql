@@ -2,10 +2,12 @@
 
 select
     sales_id,
-    date_sk,
+    date_sk as dsk,
     gross_amount
 from {{ ref('bronze_sales') }}
+    order by date_sk desc
 
 {% if is_incremental() %}
     where date_sk > (select max(date_sk) from {{ this }})
+    
 {% endif %}
