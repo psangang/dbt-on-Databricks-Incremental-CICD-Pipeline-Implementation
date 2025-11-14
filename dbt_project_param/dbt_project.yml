@@ -37,7 +37,7 @@ models:
       schema: bronze
     silver: # we have not yet created silver
       +materialized: view
-      schema: gold
+      schema: silver
     gold: # we have not yet created gold
       +materialized: view
       schema: gold
