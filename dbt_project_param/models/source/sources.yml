@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: source # This is because in databricks our schema name is source
-    database: dbt_psangang_dev  # This is databricks catalog name
+    database: '{{ target.catalog }}'  # This is databricks catalog name
     schema: source  # By default, schema should be same as name. Since, our schema is source, we are using same name here.
     tables:
       - name: fact_sales
